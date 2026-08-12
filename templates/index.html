@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CampusCompass AI</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="chat-container">
+
+        <!-- Header -->
+        <div class="chat-header">
+
+            <img src="{{ url_for('static', filename='logo.png') }}"
+                 alt="CampusCompass Logo"
+                 class="logo">
+
+            <h1>CampusCompass</h1>
+
+            <p>Your AI Assistant</p>
+
+        </div>
+
+        <!-- Chat Area -->
+        <div class="chat-box" id="chatBox">
+
+            <div class="bot-message">
+                👋 Hi! I'm <b>CampusCompass</b>.<br><br>
+                Welcome! I'm here to help you with campus information such as:
+                <br><br>
+                📍 Departments<br>
+                🎓 Courses<br>
+                🏫 Facilities<br>
+                📚 Library<br>
+                🚌 Transport<br>
+                📝 Admissions<br>
+                📞 Contact Details
+                <br><br>
+                Ask me anything!
+            </div>
+
+        </div>
+
+        <!-- Input -->
+        <div class="input-area">
+
+            <input
+                type="text"
+                id="userInput"
+                placeholder="Type your question..."
+                autocomplete="off">
+
+            <button onclick="sendMessage()">
+                Send
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,212 @@
+{
+  "library": {
+    "name": "Central Library",
+    "block": "Block B",
+    "floor": "First Floor",
+    "timing": "9:20 AM - 4:30 PM"
+  },
+  "website": {
+  "official": "https://mahendra.info"
+},
+  "departments": {
+  "cse": {
+    "name": "Computer Science and Engineering",
+    "block": "Main Block",
+    "floor": "Second Floor",
+    "hod": "Dr. M. Kannan",
+    "faculty": [
+      "Dr. A. Neela Madheswari",
+      "Dr. S. G. Balakrishnan",
+      "Dr. P. Ramya",
+      "Dr. A. Umamaheswari",
+      "Dr. K. Venkatasalam",
+      "Dr. K. Gowsic",
+      "Mr. R. Venkadesh"
+    ]
+  },
+
+  "it": {
+    "name": "Information Technology",
+    "block": "Main Block",
+    "floor": "Third Floor",
+    "hod": "Dr. S. Raju",
+    "faculty": [
+      "Dr. S. Prema",
+      "S. Latha",
+      "S. Rajeshwari",
+      "D. Sindhuja",
+      "N. Premkumar",
+      "M. Arul Sankar",
+      "S. T. Lenin",
+      "P. Indhumathi"
+    ]
+  },
+
+  "aids": {
+    "name": "Artificial Intelligence and Data Science",
+    "block": "Main Block",
+    "floor": "Third Floor",
+    "hod": "Dr. S. Ananth",
+    "faculty": [
+      "Mrs. R. Mekala",
+      "Mrs. M. Chitra",
+      "Mrs. M. Nithiya",
+      "Mrs. P. Jayapriya",
+      "Ms. P. Baby Priyadharshini",
+      "Mr. R. Sathishkumar",
+      "Mrs. K. Kalaivani",
+      "Mr. R. Sadaiyappan",
+      "Mrs. M. Sathiyaroopa",
+      "Mr. R. Prakash",
+      "Mrs. M. Sangeetha",
+      "Mrs. C. Naveena",
+      "Mrs. A. G. Thiviya",
+      "Mr. P. Dhanarasan",
+      "Mrs. T. Divya",
+      "Mrs. P. Devi",
+      "Mrs. S. Priyadharshini"
+    ]
+  },
+
+  "eee": {
+    "name": "Electrical and Electronics Engineering",
+    "block": "MEC Block",
+    "floor": "First Floor",
+    "faculty": []
+  },
+
+  "cyber_security": {
+    "name": "Cyber Security",
+    "block": "Annex Block",
+    "floor": "Ground Floor",
+    "hod": "Dr. A. Neela Madheswari"
+  }
+},
+  "medical": {
+    "name": "Medical Room",
+    "Building": "Annex",
+    "floor": "First Floor",
+    "timing": "9:20 AM - 4:30 PM"
+  },
+  "canteen": {
+    "name": "Rhytm Canteen",
+    "block": "Opp to MIET",
+    "floor": "Ground Floor",
+    "timing": "8:30 AM - 6:00 PM"
+  },
+  "placement_cell": {
+    "name": "Placement Cell",
+    "block": "Block A",
+    "floor": "Second Floor",
+    "timing": "9:20 AM - 4:30 PM"
+  },
+  "principal_office": {
+    "name": "Principal Office",
+    "block": "Administrative Block",
+    "floor": "First Floor",
+    "timing": "9:00 AM - 4:30 PM"
+  },
+  "accounts_office": {
+    "name": "Accounts Office",
+    "block": "Administrative Block",
+    "floor": "Ground Floor",
+    "timing": "10:00 AM - 4:30 PM"
+  },
+  "exam_cell": {
+    "name": "Examination Cell",
+    "block": "Block A",
+    "floor": "First Floor",
+    "timing": "9:20 AM - 5:00 PM"
+  },
+  "admission_office": {
+    "name": "Admission Office",
+    "block": "Administrative Block",
+    "floor": "Ground Floor",
+    "timing": "9:00 AM - 4:30 PM"
+  },
+  "computer_lab": {
+    "name": "Computer Laboratory",
+    "block": "Block C",
+    "floor": "Second Floor",
+    "timing": "9:20 AM - 4:30 PM"
+  },
+  "seminar_hall": {
+    "name": "Seminar Hall",
+    "block": "Block B",
+    "floor": "Second Floor",
+    "timing": "9:30 AM - 4:30 PM"
+  },
+  "auditorium": {
+    "name": "MG Auditorium",
+    "block": "Block E",
+    "floor": "Ground Floor",
+    "timing": "10:00 AM - 4:30 PM"
+  },
+  "boys_hostel": {
+    "name": "Boys Hostel",
+    "block": "Hostel Block",
+    "floor": "All Floors",
+    "timing": "Open 24 Hours"
+  },
+  "girls_hostel": {
+    "name": "Girls Hostel",
+    "block": "Hostel Block",
+    "floor": "All Floors",
+    "timing": "Open 24 Hours"
+  },
+  "transport_office": {
+    "name": "Transport Office",
+    "block": "Near Main Gate",
+    "floor": "Ground Floor",
+    "timing": "8:00 AM - 5:00 PM"
+  },
+  "sports_room": {
+    "name": "Sports Room",
+    "block": "Sports Complex",
+    "floor": "Ground Floor",
+    "timing": "8:00 AM - 5:00 PM"
+  },
+  "gym": {
+    "name": "College Gym",
+    "block": "Boys Hostel C-Block",
+    "floor": "First Floor",
+    "timing": "6:00 AM - 8:00 PM"
+  },
+  "parking": {
+    "name": "Student Parking",
+    "block": "Near Main Entrance",
+    "floor": "Ground Level",
+    "timing": "Open 24 Hours"
+  },
+ "amenities_centre": {
+  "name": "Amenities Centre",
+  "services": "Xerox, Printing, Stationery, Spiral Binding",
+  "Location": "Near Rhythm Canteen",
+  "floor": "Ground Floor",
+  "timing": "9:00 AM - 5:00 PM"
+},
+  "bank_atm": {
+    "name": "Campus ATM",
+    "block": "Near Entrance  Gate",
+    "floor": "Ground Floor",
+    "timing": "Open 24 Hours"
+  },
+  "emergency_contacts": {
+  "security": "9876543210",
+  "medical_room": "9876543211",
+  "transport": "9876543212",
+  "student_section": "9876543213"
+},"faqs": {
+  "college_timing": "College working hours are 8:30 AM to 4:30 PM.",
+  "office_contact": "For enquiries, contact the Student Section during office hours.",
+  "wifi": "Campus Wi-Fi is available for students and staff.",
+  "parking": "Student parking is available near the main entrance.",
+  "dress_code": "Students should follow the college dress code Note:Only Formals  , Casuals Are Allowed NO Jeans and Tees are  Not Allowed."
+},"rules": {
+  "id_card": "Students must wear their ID card at all times inside the campus.",
+  "attendance": "Students must maintain a minimum of 75% attendance.",
+  "mobile": "Mobile phones should be used only with faculty permission during class hours.",
+  "parking": "Vehicles must be parked only in the designated parking area.",
+  "library": "Maintain silence inside the library."
+}
+}
