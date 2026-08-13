@@ -1,76 +1,983 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CampusCompass AI</title>
-
-    <!-- Google Font -->
+    <title>CampusCompass AI - Mahendra Engineering College</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f0f2f5;
+            height: 100vh;
+            overflow: hidden;
+        }
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        .app-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ===== MAP SECTION ===== */
+        .map-section {
+            width: 55%;
+            height: 100vh;
+            background: #fff;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 4px 0 20px rgba(0,0,0,0.08);
+        }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .map-header h2 {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 6px;
+        }
+
+        .nav-btn, .clear-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 14px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+
+        .nav-btn:hover { background: rgba(255,255,255,0.35); }
+        
+        .clear-btn {
+            background: #e74c3c;
+            color: white;
+            display: none;
+        }
+        
+        .clear-btn.show { display: flex; }
+
+        .close-map {
+            display: none;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #campusMap {
+            width: 100%;
+            height: calc(100vh - 180px);
+            min-height: 250px;
+            background: #e8eaf6;
+            z-index: 1;
+        }
+
+        .building-nav {
+            display: flex;
+            gap: 6px;
+            padding: 8px 12px;
+            background: #f0f0f8;
+            border-top: 1px solid #e0e0e0;
+            flex-shrink: 0;
+            align-items: center;
+            overflow-x: auto;
+        }
+
+        .building-nav label {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #667eea;
+            white-space: nowrap;
+        }
+
+        .building-nav select {
+            padding: 5px 8px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            background: white;
+            cursor: pointer;
+            min-width: 100px;
+        }
+
+        .go-btn {
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .location-chips {
+            display: flex;
+            gap: 5px;
+            padding: 6px 12px;
+            background: #f8f9fa;
+            overflow-x: auto;
+            flex-shrink: 0;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .location-chips button {
+            white-space: nowrap;
+            padding: 4px 10px;
+            border: none;
+            border-radius: 14px;
+            background: white;
+            color: #667eea;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 500;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: all 0.2s;
+        }
+
+        .location-chips button:hover, .location-chips button.active {
+            background: #667eea;
+            color: white;
+        }
+
+        /* ===== CHAT SECTION ===== */
+        .chat-section {
+            width: 45%;
+            height: 100vh;
+            background: #f5f7fa;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 18px;
+            background: white;
+            border-bottom: 1px solid #e8e8e8;
+            flex-shrink: 0;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .bot-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        .chat-header h1 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .status {
+            font-size: 0.7rem;
+            color: #48bb78;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .online-dot {
+            width: 6px;
+            height: 6px;
+            background: #48bb78;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .map-toggle-btn {
+            display: none;
+            padding: 7px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .chat-box {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-box::-webkit-scrollbar { width: 5px; }
+        .chat-box::-webkit-scrollbar-track { background: transparent; }
+        .chat-box::-webkit-scrollbar-thumb { background: #cbd5e0; border-radius: 3px; }
+
+        .bot-message, .user-message {
+            display: flex;
+            gap: 8px;
+            max-width: 90%;
+            animation: popIn 0.25s ease-out;
+        }
+
+        @keyframes popIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .bot-message { align-self: flex-start; }
+        .user-message { align-self: flex-end; flex-direction: row-reverse; }
+
+        .msg-avatar {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+        }
+
+        .bot-message .msg-avatar { background: #e6fffa; }
+        .user-message .msg-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .msg-content {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            color: #2d3748;
+        }
+
+        .user-message .msg-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 4px;
+        }
+
+        .quick-actions {
+            display: flex;
+            gap: 6px;
+            padding: 8px 16px;
+            overflow-x: auto;
+            flex-shrink: 0;
+        }
+
+        .quick-actions button {
+            white-space: nowrap;
+            padding: 6px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            background: white;
+            color: #4a5568;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-actions button:hover {
+            background: #667eea;
+            color: white;
+            border-color: #667eea;
+        }
+
+        .typing-box {
+            display: none;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px 6px;
+            align-self: flex-start;
+        }
+
+        .typing-box.active { display: flex; }
+
+        .typing-bubble {
+            display: flex;
+            gap: 3px;
+            padding: 10px 14px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 1px 5px rgba(0,0,0,0.06);
+        }
+
+        .typing-bubble span {
+            width: 6px;
+            height: 6px;
+            background: #a0aec0;
+            border-radius: 50%;
+            animation: bounce 1.3s infinite ease-in-out both;
+        }
+
+        .typing-bubble span:nth-child(1) { animation-delay: -0.32s; }
+        .typing-bubble span:nth-child(2) { animation-delay: -0.16s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        .input-area {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: white;
+            border-top: 1px solid #e8e8e8;
+            flex-shrink: 0;
+        }
+
+        .mic-btn, .send-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+
+        .mic-btn {
+            background: #f7fafc;
+            color: #e53e3e;
+            border: 1px solid #e2e8f0;
+        }
+
+        .send-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 3px 10px rgba(102,126,234,0.3);
+        }
+
+        .send-btn:hover { transform: scale(1.05); }
+
+        #userInput {
+            flex: 1;
+            padding: 10px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 20px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        #userInput:focus { border-color: #667eea; }
+
+        .distance-badge {
+            position: absolute;
+            top: 55px;
+            left: 10px;
+            z-index: 500;
+            background: white;
+            padding: 6px 12px;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #667eea;
+            display: none;
+        }
+
+        .distance-badge.show { display: block; }
+
+        @media (max-width: 768px) {
+            .app-container { flex-direction: column; }
+            
+            .map-section {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100vh;
+                z-index: 200;
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+            }
+            
+            .map-section.active { transform: translateX(0); }
+            .close-map { display: flex; align-items: center; justify-content: center; }
+            .chat-section { width: 100%; height: 100vh; }
+            .map-toggle-btn { display: block; }
+            #campusMap { height: calc(100vh - 170px); }
+        }
+    </style>
 </head>
 
 <body>
 
-    <div class="chat-container">
-
-        <!-- Header -->
-        <div class="chat-header">
-
-            <img src="{{ url_for('static', filename='logo.png') }}"
-                 alt="CampusCompass Logo"
-                 class="logo">
-
-            <h1>CampusCompass</h1>
-
-            <p>Your AI Assistant</p>
-
-        </div>
-
-        <!-- Chat Area -->
-        <div class="chat-box" id="chatBox">
-
-            <div class="bot-message">
-                👋 Hi! I'm <b>CampusCompass</b>.<br><br>
-                Welcome! I'm here to help you with campus information such as:
-                <br><br>
-                📍 Departments<br>
-                🎓 Courses<br>
-                🏫 Facilities<br>
-                📚 Library<br>
-                🚌 Transport<br>
-                📝 Admissions<br>
-                📞 Contact Details
-                <br><br>
-                Ask me anything!
+    <div class="app-container">
+        
+        <!-- ===== MAP SECTION ===== -->
+        <div class="map-section" id="mapSection">
+            <div class="map-header">
+                <h2><i class="fas fa-map-marked-alt"></i> MEC Campus Map</h2>
+                <div class="nav-buttons">
+                    <button class="nav-btn" onclick="locateMe()">
+                        <i class="fas fa-crosshairs"></i> Me
+                    </button>
+                    <button class="nav-btn" onclick="navigateToMEC()">
+                        <i class="fas fa-directions"></i> To MEC
+                    </button>
+                    <button class="clear-btn" id="clearBtn" onclick="clearRoute()">
+                        <i class="fas fa-times"></i> Clear
+                    </button>
+                    <button class="close-map" onclick="toggleMap()"><i class="fas fa-times"></i></button>
+                </div>
+            </div>
+            
+            <div style="position: relative;">
+                <div id="campusMap"></div>
+                <div class="distance-badge" id="distanceBadge">
+                    <i class="fas fa-route"></i> <span id="distText">...</span>
+                </div>
             </div>
 
+            <!-- Building-to-Building Navigation -->
+            <div class="building-nav">
+                <label><i class="fas fa-walking"></i> From:</label>
+                <select id="fromBuilding">
+                    <option value="main-gate">Main Gate</option>
+                    <option value="cse">CSE Block</option>
+                    <option value="it">IT Block</option>
+                    <option value="ece">ECE Block</option>
+                    <option value="eee">EEE Block</option>
+                    <option value="mech">Mech Workshop</option>
+                    <option value="civil">Civil Block</option>
+                    <option value="aids">AI & DS Lab</option>
+                    <option value="library">Library</option>
+                    <option value="canteen">Canteen</option>
+                    <option value="hostel">Hostel</option>
+                    <option value="bus">Bus Stop</option>
+                </select>
+                <label>To:</label>
+                <select id="toBuilding">
+                    <option value="aids" selected>AI & DS Lab</option>
+                    <option value="main-gate">Main Gate</option>
+                    <option value="cse">CSE Block</option>
+                    <option value="it">IT Block</option>
+                    <option value="ece">ECE Block</option>
+                    <option value="eee">EEE Block</option>
+                    <option value="mech">Mech Workshop</option>
+                    <option value="civil">Civil Block</option>
+                    <option value="library">Library</option>
+                    <option value="canteen">Canteen</option>
+                    <option value="hostel">Hostel</option>
+                    <option value="bus">Bus Stop</option>
+                </select>
+                <button class="go-btn" onclick="navigateBuildingToBuilding()">
+                    <i class="fas fa-location-arrow"></i> Go
+                </button>
+            </div>
+            
+            <div class="location-chips" id="locChips">
+                <button onclick="locatePlace('main-gate')" data-place="main-gate">🚪 Gate</button>
+                <button onclick="locatePlace('cse')" data-place="cse">💻 CSE</button>
+                <button onclick="locatePlace('it')" data-place="it">🌐 IT</button>
+                <button onclick="locatePlace('ece')" data-place="ece">📡 ECE</button>
+                <button onclick="locatePlace('eee')" data-place="eee">⚡ EEE</button>
+                <button onclick="locatePlace('mech')" data-place="mech">🔧 Mech</button>
+                <button onclick="locatePlace('civil')" data-place="civil">🏗️ Civil</button>
+                <button onclick="locatePlace('aids')" data-place="aids">🧠 AI&DS</button>
+                <button onclick="locatePlace('library')" data-place="library">📚 Lib</button>
+                <button onclick="locatePlace('canteen')" data-place="canteen">🍕 Cafe</button>
+                <button onclick="locatePlace('hostel')" data-place="hostel">🏠 Hostel</button>
+                <button onclick="locatePlace('bus')" data-place="bus">🚌 Bus</button>
+            </div>
         </div>
 
-        <!-- Input -->
-        <div class="input-area">
+        <!-- ===== CHAT SECTION ===== -->
+        <div class="chat-section">
+            
+            <div class="chat-header">
+                <div class="header-info">
+                    <div class="bot-avatar">🎓</div>
+                    <div>
+                        <h1>CampusCompass</h1>
+                        <p class="status"><span class="online-dot"></span> Online</p>
+                    </div>
+                </div>
+                <button class="map-toggle-btn" onclick="toggleMap()">
+                    <i class="fas fa-map"></i> Map
+                </button>
+            </div>
 
-            <input
-                type="text"
-                id="userInput"
-                placeholder="Type your question..."
-                autocomplete="off">
+            <div class="chat-box" id="chatBox">
+                <div class="bot-message">
+                    <div class="msg-avatar">🤖</div>
+                    <div class="msg-content">
+                        <b>Vanakkam! 👋</b><br><br>
+                        Welcome to <b>Mahendra Engineering College</b>!<br>
+                        📍 Mallasamudram, Namakkal<br><br>
+                        🗺️ <b>New:</b> Building-to-building navigation!<br>
+                        🧠 <b>New:</b> AI & Data Science dept added!<br><br>
+                        Ask me about faculty, locations, or tap a button!
+                    </div>
+                </div>
+            </div>
 
-            <button onclick="sendMessage()">
-                Send
-            </button>
+            <div class="quick-actions">
+                <button onclick="sendQuick('Who is AIDS HOD?')">🧠 AIDS HOD</button>
+                <button onclick="sendQuick('CSE faculty list')">💻 CSE Faculty</button>
+                <button onclick="sendQuick('Navigate from main gate to AI DS lab')">🧭 Navigate</button>
+                <button onclick="sendQuick('Bus timings')">🚌 Bus</button>
+                <button onclick="sendQuick('Hostel details')">🏠 Hostel</button>
+                <button onclick="sendQuick('Placement info')">💼 Placements</button>
+            </div>
 
+            <div class="typing-box" id="typingBox">
+                <div class="msg-avatar">🤖</div>
+                <div class="typing-bubble">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <button class="mic-btn" onclick="startVoice()" title="Voice">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <input 
+                    type="text" 
+                    id="userInput" 
+                    placeholder="Ask about MEC..." 
+                    autocomplete="off"
+                    onkeypress="handleKeyPress(event)">
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
         </div>
-
     </div>
 
-    <!-- JavaScript -->
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    
+    <script>
+        const MEC_LAT = 11.4765;
+        const MEC_LNG = 77.9997;
 
+        const places = {
+            'main-gate': { lat: 11.4765, lng: 77.9997, name: '🚪 Main Gate', color: '#e74c3c' },
+            'cse': { lat: 11.4768, lng: 77.9995, name: '💻 CSE Block', color: '#3498db' },
+            'it': { lat: 11.4766, lng: 77.9994, name: '🌐 IT Block', color: '#9b59b6' },
+            'ece': { lat: 11.4763, lng: 77.9996, name: '📡 ECE Block', color: '#e67e22' },
+            'eee': { lat: 11.4764, lng: 77.9993, name: '⚡ EEE Block', color: '#f1c40f' },
+            'mech': { lat: 11.4770, lng: 77.9998, name: '🔧 Mech Workshop', color: '#1abc9c' },
+            'civil': { lat: 11.4762, lng: 77.9992, name: '🏗️ Civil Block', color: '#95a5a6' },
+            'aids': { lat: 11.4769, lng: 77.9993, name: '🧠 AI & DS Lab', color: '#8e44ad' },
+            'library': { lat: 11.4761, lng: 77.9999, name: '📚 Library', color: '#34495e' },
+            'canteen': { lat: 11.4760, lng: 77.9996, name: '🍕 Canteen', color: '#e74c3c' },
+            'hostel': { lat: 11.4772, lng: 78.0001, name: '🏠 Hostel', color: '#2ecc71' },
+            'bus': { lat: 11.4764, lng: 77.9998, name: '🚌 Bus Stop', color: '#e67e22' }
+        };
+
+        let map;
+        let markers = {};
+        let userMarker = null;
+        let routeLines = [];
+        let isNavigating = false;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            map = L.map('campusMap', {
+                zoomControl: true,
+                attributionControl: true
+            }).setView([MEC_LAT, MEC_LNG], 16);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; OpenStreetMap',
+                maxZoom: 19
+            }).addTo(map);
+
+            for (let key in places) {
+                const p = places[key];
+                const customIcon = L.divIcon({
+                    className: 'custom-marker',
+                    html: `<div style="background:${p.color};width:26px;height:26px;border-radius:50%;border:2px solid white;box-shadow:0 2px 6px rgba(0,0,0,0.3);display:flex;align-items:center;justify-content:center;color:white;font-size:11px;font-weight:bold;">${key.charAt(0).toUpperCase()}</div>`,
+                    iconSize: [26, 26],
+                    iconAnchor: [13, 13]
+                });
+                
+                markers[key] = L.marker([p.lat, p.lng], { icon: customIcon })
+                    .addTo(map)
+                    .bindPopup(`<b>${p.name}</b><br>MEC Campus`);
+            }
+
+            L.marker([MEC_LAT, MEC_LNG], {
+                icon: L.divIcon({
+                    className: 'college-label',
+                    html: '<div style="background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:5px 12px;border-radius:16px;font-size:12px;font-weight:700;white-space:nowrap;box-shadow:0 3px 12px rgba(102,126,234,0.4);">🏛️ Mahendra Engg College</div>',
+                    iconSize: [140, 30],
+                    iconAnchor: [70, 15]
+                })
+            }).addTo(map);
+        });
+
+        function clearRoute() {
+            routeLines.forEach(line => {
+                if (map.hasLayer(line)) map.removeLayer(line);
+            });
+            routeLines = [];
+            
+            if (userMarker && map.hasLayer(userMarker)) {
+                map.removeLayer(userMarker);
+                userMarker = null;
+            }
+            
+            document.getElementById('distanceBadge').classList.remove('show');
+            document.getElementById('clearBtn').classList.remove('show');
+            
+            map.setView([MEC_LAT, MEC_LNG], 16);
+            map.closePopup();
+            
+            document.querySelectorAll('.location-chips button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            isNavigating = false;
+        }
+
+        function locateMe() {
+            if (!navigator.geolocation) {
+                alert('Geolocation not supported!');
+                return;
+            }
+
+            clearRoute();
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+
+                    const userIcon = L.divIcon({
+                        html: '<div style="width:18px;height:18px;background:#3498db;border-radius:50%;border:3px solid white;box-shadow:0 0 0 6px rgba(52,152,219,0.3);"></div>',
+                        iconSize: [18, 18],
+                        iconAnchor: [9, 9]
+                    });
+
+                    userMarker = L.marker([userLat, userLng], { icon: userIcon })
+                        .addTo(map)
+                        .bindPopup('<b>📍 You are here!</b>');
+
+                    const dist = calculateDistance(userLat, userLng, MEC_LAT, MEC_LNG);
+                    
+                    const line = L.polyline(
+                        [[userLat, userLng], [MEC_LAT, MEC_LNG]],
+                        { color: '#667eea', weight: 4, opacity: 0.7, dashArray: '8, 8' }
+                    ).addTo(map);
+                    routeLines.push(line);
+
+                    const badge = document.getElementById('distanceBadge');
+                    document.getElementById('distText').innerHTML = `You are <b>${dist.toFixed(1)} km</b> from MEC`;
+                    badge.classList.add('show');
+                    document.getElementById('clearBtn').classList.add('show');
+
+                    map.fitBounds([
+                        [userLat, userLng],
+                        [MEC_LAT, MEC_LNG]
+                    ], { padding: [60, 60], maxZoom: 16 });
+
+                    isNavigating = true;
+
+                    addBotMessage(`📍 <b>Your Location Detected!</b><br>You are <b>${dist.toFixed(1)} km</b> away from MEC.<br>Click <b>"Clear"</b> to reset the map.`);
+                },
+                function(error) {
+                    alert('Could not get location. Enable GPS and try again.');
+                },
+                { enableHighAccuracy: true, timeout: 10000 }
+            );
+        }
+
+        function navigateToMEC() {
+            const url = `https://www.google.com/maps/dir/?api=1&destination=${MEC_LAT},${MEC_LNG}&destination_place_id=Mahendra+Engineering+College`;
+            window.open(url, '_blank');
+        }
+
+        function navigateBuildingToBuilding() {
+            const fromId = document.getElementById('fromBuilding').value;
+            const toId = document.getElementById('toBuilding').value;
+            
+            if (fromId === toId) {
+                alert('From and To cannot be the same!');
+                return;
+            }
+            
+            const from = places[fromId];
+            const to = places[toId];
+            
+            if (!from || !to) return;
+            
+            clearRoute();
+            
+            const line = L.polyline(
+                [[from.lat, from.lng], [to.lat, to.lng]],
+                { color: '#e74c3c', weight: 5, opacity: 0.8, dashArray: '10, 6' }
+            ).addTo(map);
+            routeLines.push(line);
+            
+            const dist = calculateDistance(from.lat, from.lng, to.lat, to.lng);
+            const distMeters = (dist * 1000).toFixed(0);
+            
+            document.getElementById('clearBtn').classList.add('show');
+            
+            map.fitBounds([
+                [from.lat, from.lng],
+                [to.lat, to.lng]
+            ], { padding: [80, 80], maxZoom: 18 });
+            
+            const midLat = (from.lat + to.lat) / 2;
+            const midLng = (from.lng + to.lng) / 2;
+            
+            L.popup()
+                .setLatLng([midLat, midLng])
+                .setContent(`<b>🚶 Route</b><br>${from.name} → ${to.name}<br>📏 ~${distMeters} meters`)
+                .openOn(map);
+            
+            document.querySelectorAll('.location-chips button').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.place === fromId || btn.dataset.place === toId) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            isNavigating = true;
+            
+            addBotMessage(`🧭 <b>Navigation</b><br><br>From: <b>${from.name}</b><br>To: <b>${to.name}</b><br>📏 Distance: <b>~${distMeters} meters</b><br><br>Follow the <b>red dashed line</b> on the map!`);
+        }
+
+        function locatePlace(placeId) {
+            if (!map || !places[placeId]) return;
+            
+            const p = places[placeId];
+            map.setView([p.lat, p.lng], 18);
+            
+            if (markers[placeId]) {
+                markers[placeId].openPopup();
+            }
+            
+            document.querySelectorAll('.location-chips button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.place === placeId);
+            });
+        }
+
+        function calculateDistance(lat1, lng1, lat2, lng2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLng = (lng2 - lng1) * Math.PI / 180;
+            const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLng/2) * Math.sin(dLng/2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+            return R * c;
+        }
+
+        function toggleMap() {
+            document.getElementById('mapSection').classList.toggle('active');
+        }
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendQuick(text) {
+            document.getElementById('userInput').value = text;
+            sendMessage();
+        }
+
+        function showTyping() {
+            document.getElementById('typingBox').classList.add('active');
+            scrollToBottom();
+        }
+
+        function hideTyping() {
+            document.getElementById('typingBox').classList.remove('active');
+        }
+
+        function scrollToBottom() {
+            const box = document.getElementById('chatBox');
+            box.scrollTop = box.scrollHeight;
+        }
+
+        function addUserMessage(text) {
+            const box = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = 'user-message';
+            div.innerHTML = `
+                <div class="msg-avatar"><i class="fas fa-user"></i></div>
+                <div class="msg-content">${escapeHtml(text)}</div>
+            `;
+            box.appendChild(div);
+            scrollToBottom();
+        }
+
+        function addBotMessage(html) {
+            const box = document.getElementById('chatBox');
+            const div = document.createElement('div');
+            div.className = 'bot-message';
+            div.innerHTML = `
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-content">${html}</div>
+            `;
+            box.appendChild(div);
+            scrollToBottom();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        async function sendMessage() {
+            const input = document.getElementById('userInput');
+            const text = input.value.trim();
+            if (!text) return;
+
+            addUserMessage(text);
+            input.value = '';
+            showTyping();
+
+            const lower = text.toLowerCase();
+            
+            if (lower.includes('from') && lower.includes('to') && 
+                (lower.includes('gate') || lower.includes('block') || lower.includes('lab') || 
+                 lower.includes('library') || lower.includes('canteen') || lower.includes('hostel'))) {
+                
+                let fromId = null, toId = null;
+                for (let key in places) {
+                    const placeName = places[key].name.toLowerCase();
+                    if (lower.includes(placeName.replace(/[^a-z0-9& ]/g, '').trim()) || 
+                        lower.includes(key.toLowerCase())) {
+                        if (!fromId) fromId = key;
+                        else if (!toId) toId = key;
+                    }
+                }
+                
+                if (!fromId) fromId = 'main-gate';
+                if (!toId) toId = 'library';
+                
+                hideTyping();
+                document.getElementById('fromBuilding').value = fromId;
+                document.getElementById('toBuilding').value = toId;
+                navigateBuildingToBuilding();
+                return;
+            }
+
+            if (lower.includes('navigate') || lower.includes('direction') || lower.includes('how to reach')) {
+                hideTyping();
+                addBotMessage(`🧭 <b>Navigate to MEC</b><br><br>📍 Address: Salem-Tiruchengode Highway, Mahendhirapuri, Mallasamudram West, Namakkal - 637503<br><br>Use the <b>map dropdowns</b> (From → To) to navigate between buildings!<br><br>Or click <b>"To MEC"</b> for Google Maps directions.`);
+                return;
+            }
+
+            if (lower.includes('how far') || lower.includes('distance') || lower.includes('where am i')) {
+                hideTyping();
+                addBotMessage(`📍 Click the <b>"Me"</b> button on the map to detect your location and see distance from MEC!`);
+                return;
+            }
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text })
+                });
+
+                const data = await response.json();
+                hideTyping();
+
+                if (data.reply) {
+                    addBotMessage(data.reply.replace(/\n/g, '<br>'));
+                } else {
+                    addBotMessage("Sorry, I didn't get a response. Try again!");
+                }
+            } catch (error) {
+                hideTyping();
+                addBotMessage("⚠️ <b>Server Offline</b><br>Make sure Flask is running!<br><br>Or use the map to navigate between buildings.");
+            }
+        }
+
+        function startVoice() {
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                alert('Voice input not supported. Try Chrome!');
+                return;
+            }
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-IN';
+            recognition.start();
+            
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                document.getElementById('userInput').value = transcript;
+                sendMessage();
+            };
+        }
+    </script>
 </body>
-
 </html>

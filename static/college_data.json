@@ -1,212 +1,301 @@
 {
-  "library": {
-    "name": "Central Library",
-    "block": "Block B",
-    "floor": "First Floor",
-    "timing": "9:20 AM - 4:30 PM"
-  },
-  "website": {
-  "official": "https://mahendra.info"
-},
-  "departments": {
-  "cse": {
-    "name": "Computer Science and Engineering",
-    "block": "Main Block",
-    "floor": "Second Floor",
-    "hod": "Dr. M. Kannan",
+    "college_name": "Mahendra Engineering College",
+    "location": "Salem-Tiruchengode Highway, Mahendhirapuri, Mallasamudram West, Namakkal - 637503",
+    "coordinates": { "lat": 11.4765, "lng": 77.9997 },
+    "established": 1995,
+    "trust_established": 1978,
+    "trust_founder": "Shri. M. G. Bharath Kumar",
+    "chairman": "Thiru. M.G. Bharath Kumar",
+    "secretary": "Tmt. Valliyammal Bharath Kumar (Best Teacher Awardee)",
+    "managing_director": "Thiru Ba. Mahendhiran",
+    "principal": "Dr. T. Elango (Innovation & Sustainability Award 2022)",
+    "dean_academics": "Dr. S. Nirmala",
+    "campus_area": "130 acres",
+    "affiliation": "Anna University, Chennai",
+    "approval": "AICTE Approved, NAAC 'A' Grade",
+
+    "achievements": {
+        "naac": "NAAC 'A' Grade Accredited",
+        "iic_rating": "MHRD-AICTE 4-Star Rating for Innovation & Entrepreneurship",
+        "ariia_2020": "ARIIA Band 'B' (Ranks 26-50) by MHRD-AICTE",
+        "ariia_2021": "ARIIA Band 'EXCELLENT' - Self-Financing Institutions",
+        "placement_2024": "920 students placed in 2024",
+        "median_salary": "₹4.0 LPA",
+        "publications": "131+ Journal Publications",
+        "conferences": "112+ Conferences",
+        "patents": "14 Patents",
+        "research_grants": "₹57 Lakhs received",
+        "nptel_2023": "20 faculty completed NPTEL SWAYAM exam",
+        "phd_registered": "24 faculty registered Ph.D at Anna University"
+    },
+
+    "awards": {
+        "principal": "Dr. T. Elango - Innovation & Sustainability Award (IEI Salem, 2022)",
+        "hod_mech": "Dr. K. Rajkumar - Best Engineer Award (IEI Salem, 2022)",
+        "hod_eee": "Dr. N. Saravanakumar - ₹1,00,000 SERB-DST grant for IoT Smart Grid Seminar (2023)",
+        "cse_faculty": "Dr. P. Ramya - Outstanding Women in Engineering (Venus International Women Awards)",
+        "civil_faculty": "Dr. C.T. Sivakumar - Innovative Research Technologies Award (University of Mara, Malaysia)",
+        "science_faculty": "Dr. V. Aroulmoji - Gerald Blunden Award (Natural Product Communications, USA)",
+        "women_engineer": "Dr. S. Umamaheswari - Best Women Engineer Award (Institution of Engineers India)",
+        "student_award": "Mr. S. Vetrimani (IV BME) - Dr. A.P.J. Abdul Kalam Award for Best Engineering Student (IEI Salem, 2022)",
+        "mentor_award": "K. Rajeswari - Top Performance Mentor Award (NPTEL)"
+    },
+
+    "departments": {
+        "cse": {
+            "name": "Computer Science & Engineering",
+            "block": "Academic Block A",
+            "floor": "2nd Floor",
+            "hod": "Dr. P. Brindha (Professor & HOD)",
+            "faculty_count": "38 (including 13 PhDs)",
+            "faculty": [
+                "Dr. P. Brindha - Professor & HOD",
+                "Dr. P. Ramya - Outstanding Women in Engineering Awardee",
+                "Dr. A. Neela Madheswari - Associate Professor",
+                "Dr. R. Venkadesh - Associate Professor"
+            ],
+            "courses": ["BE Computer Science & Engineering (4 Years)"],
+            "labs": ["AI Lab", "Data Science Lab", "Cyber Security Lab", "Cloud Computing Lab"],
+            "placement_rate": "~91%"
+        },
+
+        "it": {
+            "name": "Information Technology",
+            "block": "Academic Block A",
+            "floor": "1st Floor",
+            "hod": "Dr. S. Raju (HOD / Professor)",
+            "faculty": [
+                "Dr. S. Raju - HOD / Professor",
+                "Dr. S. Prema - Associate Professor",
+                "S. Latha - Assistant Professor",
+                "S. Rajeshwari - Assistant Professor",
+                "D. Sindhuja - Assistant Professor",
+                "N. Premkumar - Assistant Professor",
+                "M. Arul Sankar - Assistant Professor",
+                "S. T. Lenin - Assistant Professor",
+                "P. Indhumathi - Assistant Professor",
+                "K. Gowthami - Assistant Professor"
+            ],
+            "courses": ["B.Tech Information Technology (4 Years)"],
+            "labs": ["Cloud Computing Lab", "IoT Lab", "Web Development Lab"]
+        },
+
+        "ece": {
+            "name": "Electronics & Communication Engineering",
+            "block": "Academic Block B",
+            "floor": "Ground Floor",
+            "hod": "Dr. S. Sakthivel (Professor & HOD)",
+            "faculty": [
+                "Dr. S. Sakthivel - Professor & HOD",
+                "Dr. D. Chitra - Professor",
+                "Dr. P. Balashanmuga Vadivu - Associate Professor",
+                "Dr. R. Suresh - Associate Professor"
+            ],
+            "courses": ["BE Electronics & Communication Engineering (4 Years)"]
+        },"aids": {
+    "name": "Artificial Intelligence & Data Science (AI & DS)",
+    "block": "Academic Block A",
+    "floor": "2nd Floor (Near CSE)",
+    "hod": "Dr. S. Ananth (Associate Professor & Head)",
+    "phone": "(0427) 2482884",
+    "faculty_count": "15",
     "faculty": [
-      "Dr. A. Neela Madheswari",
-      "Dr. S. G. Balakrishnan",
-      "Dr. P. Ramya",
-      "Dr. A. Umamaheswari",
-      "Dr. K. Venkatasalam",
-      "Dr. K. Gowsic",
-      "Mr. R. Venkadesh"
-    ]
-  },
-
-  "it": {
-    "name": "Information Technology",
-    "block": "Main Block",
-    "floor": "Third Floor",
-    "hod": "Dr. S. Raju",
-    "faculty": [
-      "Dr. S. Prema",
-      "S. Latha",
-      "S. Rajeshwari",
-      "D. Sindhuja",
-      "N. Premkumar",
-      "M. Arul Sankar",
-      "S. T. Lenin",
-      "P. Indhumathi"
-    ]
-  },
-
-  "aids": {
-    "name": "Artificial Intelligence and Data Science",
-    "block": "Main Block",
-    "floor": "Third Floor",
-    "hod": "Dr. S. Ananth",
-    "faculty": [
-      "Mrs. R. Mekala",
-      "Mrs. M. Chitra",
-      "Mrs. M. Nithiya",
-      "Mrs. P. Jayapriya",
-      "Ms. P. Baby Priyadharshini",
-      "Mr. R. Sathishkumar",
-      "Mrs. K. Kalaivani",
-      "Mr. R. Sadaiyappan",
-      "Mrs. M. Sathiyaroopa",
-      "Mr. R. Prakash",
-      "Mrs. M. Sangeetha",
-      "Mrs. C. Naveena",
-      "Mrs. A. G. Thiviya",
-      "Mr. P. Dhanarasan",
-      "Mrs. T. Divya",
-      "Mrs. P. Devi",
-      "Mrs. S. Priyadharshini"
-    ]
-  },
-
-  "eee": {
-    "name": "Electrical and Electronics Engineering",
-    "block": "MEC Block",
-    "floor": "First Floor",
-    "faculty": []
-  },
-
-  "cyber_security": {
-    "name": "Cyber Security",
-    "block": "Annex Block",
-    "floor": "Ground Floor",
-    "hod": "Dr. A. Neela Madheswari"
-  }
+        "Dr. S. Ananth - Associate Professor & HOD",
+        "Mr. N. Balachandar - Assistant Professor",
+        "Mrs. A. Brindha Monica Seles - Assistant Professor",
+        "Mrs. S. Indhumathi - Assistant Professor",
+        "Ms. M. Sowmiya - Assistant Professor",
+        "Mr. R. Gunasekaran - Assistant Professor",
+        "Mr. J. Prabakaran - Assistant Professor",
+        "Mr. A. Anbarasan - Assistant Professor",
+        "Mrs. G. Nandhini - Assistant Professor",
+        "Mrs. S. Malarvizhi - Assistant Professor",
+        "Mrs. R. Bhavya - Assistant Professor",
+        "Mrs. N. Thenmozhi - Assistant Professor",
+        "Mrs. V. Thangaponnu - Assistant Professor",
+        "Mrs. G. Kalaivani - Assistant Professor",
+        "Mrs. C. Marysubitha Jenefer - Assistant Professor"
+    ],
+    "labs": [
+        "Problem Solving & Python Programming Lab",
+        "Data Structures Design Lab",
+        "Database Design & Management Lab",
+        "Artificial Intelligence Lab",
+        "Data Science & Analytics Lab",
+        "Machine Learning Lab",
+        "Deep Learning Lab"
+    ],
+    "courses": ["B.Tech Artificial Intelligence & Data Science (4 Years)"],
+    "focus_areas": ["Machine Learning", "Deep Learning", "Data Analytics", "Python", "AI Algorithms"]
 },
-  "medical": {
-    "name": "Medical Room",
-    "Building": "Annex",
-    "floor": "First Floor",
-    "timing": "9:20 AM - 4:30 PM"
-  },
-  "canteen": {
-    "name": "Rhytm Canteen",
-    "block": "Opp to MIET",
-    "floor": "Ground Floor",
-    "timing": "8:30 AM - 6:00 PM"
-  },
-  "placement_cell": {
-    "name": "Placement Cell",
-    "block": "Block A",
-    "floor": "Second Floor",
-    "timing": "9:20 AM - 4:30 PM"
-  },
-  "principal_office": {
-    "name": "Principal Office",
-    "block": "Administrative Block",
-    "floor": "First Floor",
-    "timing": "9:00 AM - 4:30 PM"
-  },
-  "accounts_office": {
-    "name": "Accounts Office",
-    "block": "Administrative Block",
-    "floor": "Ground Floor",
-    "timing": "10:00 AM - 4:30 PM"
-  },
-  "exam_cell": {
-    "name": "Examination Cell",
-    "block": "Block A",
-    "floor": "First Floor",
-    "timing": "9:20 AM - 5:00 PM"
-  },
-  "admission_office": {
-    "name": "Admission Office",
-    "block": "Administrative Block",
-    "floor": "Ground Floor",
-    "timing": "9:00 AM - 4:30 PM"
-  },
-  "computer_lab": {
-    "name": "Computer Laboratory",
-    "block": "Block C",
-    "floor": "Second Floor",
-    "timing": "9:20 AM - 4:30 PM"
-  },
-  "seminar_hall": {
-    "name": "Seminar Hall",
-    "block": "Block B",
-    "floor": "Second Floor",
-    "timing": "9:30 AM - 4:30 PM"
-  },
-  "auditorium": {
-    "name": "MG Auditorium",
-    "block": "Block E",
-    "floor": "Ground Floor",
-    "timing": "10:00 AM - 4:30 PM"
-  },
-  "boys_hostel": {
-    "name": "Boys Hostel",
-    "block": "Hostel Block",
-    "floor": "All Floors",
-    "timing": "Open 24 Hours"
-  },
-  "girls_hostel": {
-    "name": "Girls Hostel",
-    "block": "Hostel Block",
-    "floor": "All Floors",
-    "timing": "Open 24 Hours"
-  },
-  "transport_office": {
-    "name": "Transport Office",
-    "block": "Near Main Gate",
-    "floor": "Ground Floor",
-    "timing": "8:00 AM - 5:00 PM"
-  },
-  "sports_room": {
-    "name": "Sports Room",
-    "block": "Sports Complex",
-    "floor": "Ground Floor",
-    "timing": "8:00 AM - 5:00 PM"
-  },
-  "gym": {
-    "name": "College Gym",
-    "block": "Boys Hostel C-Block",
-    "floor": "First Floor",
-    "timing": "6:00 AM - 8:00 PM"
-  },
-  "parking": {
-    "name": "Student Parking",
-    "block": "Near Main Entrance",
-    "floor": "Ground Level",
-    "timing": "Open 24 Hours"
-  },
- "amenities_centre": {
-  "name": "Amenities Centre",
-  "services": "Xerox, Printing, Stationery, Spiral Binding",
-  "Location": "Near Rhythm Canteen",
-  "floor": "Ground Floor",
-  "timing": "9:00 AM - 5:00 PM"
-},
-  "bank_atm": {
-    "name": "Campus ATM",
-    "block": "Near Entrance  Gate",
-    "floor": "Ground Floor",
-    "timing": "Open 24 Hours"
-  },
-  "emergency_contacts": {
-  "security": "9876543210",
-  "medical_room": "9876543211",
-  "transport": "9876543212",
-  "student_section": "9876543213"
-},"faqs": {
-  "college_timing": "College working hours are 8:30 AM to 4:30 PM.",
-  "office_contact": "For enquiries, contact the Student Section during office hours.",
-  "wifi": "Campus Wi-Fi is available for students and staff.",
-  "parking": "Student parking is available near the main entrance.",
-  "dress_code": "Students should follow the college dress code Note:Only Formals  , Casuals Are Allowed NO Jeans and Tees are  Not Allowed."
-},"rules": {
-  "id_card": "Students must wear their ID card at all times inside the campus.",
-  "attendance": "Students must maintain a minimum of 75% attendance.",
-  "mobile": "Mobile phones should be used only with faculty permission during class hours.",
-  "parking": "Vehicles must be parked only in the designated parking area.",
-  "library": "Maintain silence inside the library."
-}
+
+        "eee": {
+            "name": "Electrical & Electronics Engineering",
+            "block": "Academic Block B",
+            "floor": "1st Floor",
+            "hod": "Dr. N. Saravanakumar (Professor & HOD)",
+            "faculty": [
+                "Dr. N. Saravanakumar - Professor & HOD (SERB-DST Grant Awardee)",
+                "Dr. R. Anand - Associate Professor",
+                "Dr. M.S. Saravanan - Associate Professor"
+            ],
+            "achievement": "Received ₹1,00,000 SERB-DST grant for National Seminar on IoT in Smart Grid (2023)"
+        },
+
+        "mech": {
+            "name": "Mechanical Engineering",
+            "block": "Workshop Block",
+            "floor": "Ground Floor",
+            "hod": "Dr. K. Rajkumar (Professor & HOD, Ph.D)",
+            "faculty_count": "12 PhDs + 11 Master's degree holders",
+            "faculty": [
+                "Dr. K. Rajkumar - Professor & HOD (Best Engineer Award 2022)",
+                "Dr. T. Elango - Principal (Innovation Award 2022)",
+                "Dr. L. Selvarajan - Professor",
+                "Dr. K. Murugan - Professor",
+                "Dr. N. Mohanasundararaju - Professor",
+                "Dr. S. Balamurugan - Professor",
+                "Dr. M. Haridass - Associate Professor",
+                "Dr. R. Nandhakumar - Associate Professor",
+                "Dr. C. Prabhu - Assistant Professor"
+            ],
+            "research_center": "Anna University recognized Research Centre",
+            "software": ["Solid Works", "Pro-E", "ANSYS", "CATIA"],
+            "focus_areas": ["Alternate fuels", "IC Engines", "Heat Transfer", "Composites", "Welding & Corrosion"]
+        },
+
+        "civil": {
+            "name": "Civil Engineering",
+            "block": "Academic Block C",
+            "floor": "1st Floor",
+            "hod": "Dr. K. Vidhya (Professor & HOD, Ph.D)",
+            "faculty_count": "37 faculty members",
+            "faculty": [
+                "Dr. K. Vidhya - Professor & HOD (113 publications)",
+                "Dr. C.T. Sivakumar - Professor (46 publications, Innovative Research Award Malaysia)",
+                "Dr. H. Vijayakumar - Professor (Ph.D)",
+                "Mr. S. Mohan - Assistant Professor (30 publications)",
+                "Mr. Y. Shantharam - Assistant Professor (25 publications)",
+                "Mr. M. Dewakar - Assistant Professor (20 publications)"
+            ]
+        },
+
+        "auto": {
+            "name": "Automobile Engineering",
+            "block": "Workshop Block",
+            "floor": "1st Floor",
+            "courses": ["BE Automobile Engineering (4 Years)"],
+            "workshops": ["Vehicle Dynamics", "Engine Testing"]
+        },
+
+        "biomedical": {
+            "name": "Biomedical Engineering",
+            "block": "Academic Block C",
+            "floor": "2nd Floor",
+            "hod": "Dr. Prabhu M (Professor & HOD)",
+            "courses": ["BE Biomedical Engineering (4 Years)"]
+        },
+
+        "aeronautical": {
+            "name": "Aeronautical Engineering",
+            "block": "TBD",
+            "hod": "Dr. C. Dhavamani (Professor & HOD)"
+        },
+
+        "agricultural": {
+            "name": "Agricultural Engineering",
+            "hod": "Dr. K.R. Kalpana (Associate Professor & HOD)"
+        },
+
+        "english": {
+            "name": "Department of English",
+            "hod": "Dr. J. Kavitha (Professor & HOD)"
+        },
+
+        "chemistry": {
+            "name": "Department of Chemistry",
+            "hod": "Dr. P. Jamunarani (Professor & HOD, Women Empowerment Cell)"
+        },
+
+        "mathematics": {
+            "name": "Department of Mathematics",
+            "faculty": [
+                "Dr. T. Raja - Assistant Professor",
+                "Dr. V. Madhuri - Assistant Professor",
+                "Dr. D. Vidhya - Assistant Professor"
+            ]
+        }
+    },
+
+    "research_supervisors": [
+        {"name": "Dr. T. Elango", "dept": "Mechanical Engineering", "role": "Principal"},
+        {"name": "Dr. L. Selvarajan", "dept": "Mechanical Engineering"},
+        {"name": "Dr. K. Murugan", "dept": "Mechanical Engineering"},
+        {"name": "Dr. N. Saravanakumar", "dept": "Electrical & Electronics Engineering"},
+        {"name": "Dr. S. Prabu", "dept": "Electronics & Communication Engineering"},
+        {"name": "Dr. V. Ellappan", "dept": "Electronics & Communication Engineering"},
+        {"name": "Dr. N. Satish", "dept": "Information Technology"},
+        {"name": "Dr. M. Prabhu", "dept": "Biomedical Engineering"},
+        {"name": "Dr. P. Jamunarani", "dept": "Chemistry", "role": "HOD/Chemistry & Women Empowerment Cell"}
+    ],
+
+    "library": {
+        "name": "Central Library",
+        "location": "Near Main Academic Block",
+        "timings": "8:00 AM - 8:00 PM",
+        "floor": "Ground + 1st Floor",
+        "facilities": ["Digital Section", "Wi-Fi", "Reading Halls", "Journal Section"],
+        "books": "50,000+ volumes",
+        "daily_footfall": "179+ teachers and students per day"
+    },
+
+    "canteen": {
+        "name": "College Canteen",
+        "location": "Near Hostel Block",
+        "timings": {
+            "breakfast": "7:30 AM - 9:30 AM",
+            "lunch": "12:00 PM - 3:00 PM",
+            "snacks": "4:00 PM - 6:00 PM"
+        },
+        "type": "Veg & Non-Veg available at affordable prices"
+    },
+
+    "hostel": {
+        "boys": {
+            "location": "East Campus",
+            "facilities": ["Wi-Fi", "24/7 Security", "Hot Water", "Gym", "Indoor Games", "Reading Room"],
+            "rent": "₹50,000 per year (approx)"
+        },
+        "girls": {
+            "location": "West Campus",
+            "facilities": ["Wi-Fi", "24/7 Security", "Hot Water", "Reading Room"],
+            "rent": "₹50,000 per year (approx)"
+        }
+    },
+
+    "transport": {
+        "bus_routes": ["Salem", "Namakkal", "Tiruchengode", "Rasipuram", "Attur"],
+        "timings": "7:30 AM - 6:30 PM",
+        "bus_stop": "Main Entrance Gate"
+    },
+
+    "placements": {
+        "cell": "Training & Placement Cell",
+        "2024_stats": {
+            "placed": 920,
+            "median_salary": "₹4.0 LPA",
+            "top_recruiters": ["IBM", "Cognizant", "Capgemini", "Thoughtworks", "Juspay", "Infosys", "TCS"]
+        }
+    },
+
+    "facilities": {
+        "wifi": "Campus-wide Wi-Fi with 8 access points",
+        "internet": "64+ Mbps bandwidth",
+        "computers": "600+ systems (Intel Core i5)",
+        "atm": "Available near Main Gate",
+        "medical": "First Aid Center in Admin Block",
+        "parking": "Two-wheeler & Four-wheeler parking",
+        "cctv": "Full campus CCTV surveillance",
+        "solar": "Solar energy facilities available"
+    }
 }
